@@ -1,11 +1,14 @@
+
+%%Authors: Daniel Goncalves, Mart√≠ Berenguer, Marc Fuster.
+
 tic
-%%DeclaraciÛ de variables
+%%Declaraci√≥ de variables
 N=30; %Espai d'estudi Real
 C=6; %Costat del quadrat (ha de ser parell)
 C=C/2;
-Vquadrat=1; %Potencial del quadrat, 1 per normalitzaciÛ.
+Vquadrat=1; %Potencial del quadrat, 1 per normalitzaci√≥.
     
-%CreaciÛ de la matriu
+%Creaci√≥ de la matriu
     V=zeros(N,N);
 %Cond.Cont del quadrat interior   
     V((((end/2-C)):(end/2)+C),((end/2-C)):end/2+C)=Vquadrat;  
@@ -23,11 +26,11 @@ tolerancia=0.0001;
 A=rand(1)*100;
 iteracions=1;
 
-while A>tolerancia %%Aquest while es per depurar la funciÛ, fent que l'aproximaciÛ numËrica sigui molt mÈs bona
+while A>tolerancia %%Aquest while es per depurar la funci√≥, fent que l'aproximaci√≥ num√®rica sigui molt m√©s bona
     Norm1=norm(V);
     for i=2:N-1;
         for j=2:N-1;
-              if V(i,j)==1 %% El continue salta a la seguent iteraciÛ del for
+              if V(i,j)==1 %% El continue salta a la seguent iteraci√≥ del for
                 continue;  %% Si el voltatge es 1, ho salta ---> Mante el quadrat fixe
               end
     
@@ -35,12 +38,12 @@ while A>tolerancia %%Aquest while es per depurar la funciÛ, fent que l'aproximac
         end
     end
     Norm2=norm(V);
-    A=abs(Norm2-Norm1); %%Diferencia entre xn i xn+1 --> aproximaciÛ del resultat
+    A=abs(Norm2-Norm1); %%Diferencia entre xn i xn+1 --> aproximaci√≥ del resultat
     iteracions=iteracions+1; %% para a les 888 iteracions aprox
     
 end
 
-%Guardat de la Matriu soluciÛ amb la posiciÛ corresponent
+%Guardat de la Matriu soluci√≥ amb la posici√≥ corresponent
 arxiu = fopen('arxiu.txt','wt');
 for i=1:N
     for j=1:N
@@ -50,16 +53,16 @@ end
 fclose(arxiu)
 
 
-[Ex,Ey]=gradient(V);%%Per calcular el camp elËctric
+[Ex,Ey]=gradient(V);%%Per calcular el camp el√®ctric
 
-%%RepresentaciÛ gr‡fica de V
+%%Representaci√≥ gr√†fica de V
 figure
 hold on
 surf(V); shading interp; colorbar;
 xlabel('x(mm)')
 grid
 ylabel('y(mm)')
-zlabel('DiferËncia de potencial')
+zlabel('Difer√®ncia de potencial')
 title('Eq. de laplace per quadrat - Metode iteratiu')
 view (-54,6);
 hold off
@@ -69,7 +72,7 @@ figure
 hold on 
 contour(V,5);
 quiver(Ex,Ey,5);
-title('LÌnies equipotencials i camp elËctric')
+title('L√≠nies equipotencials i camp el√®ctric')
 hold off
     
 toc
